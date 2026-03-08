@@ -27,9 +27,9 @@
   13609: "reserve_jump_map", //params: map name, startingPositionX, startingPositionY, startingPositionZ
   3502: "load_xi", // params: fileName (without extension) and relative file path; checks language fa (locale dependant) then the main fa to find it i.e. data/menu/mm_wmap
   13612: "load_battle_ev", //params: battle event id, battle map
-  16526: "load_anm_by_filepath", // load_anm -> load_anm_by_filepath for consistency with official terminology
-  3702: "load_model_by_filepath",
-  14051: "reserve_jump_map_2", //params: map name, startingPositionX, startingPositionY, startingPositionZ
+  16526: "load_anm_by_filepath",
+  3702: "load_model",
+  14051: "reserve_jump_map2", //params: map name, startingPositionX, startingPositionY, startingPositionZ
   16532: "get_game_locale", // params: (int: showExtended) if showExtended is falsy or undefined, it gets the current locale the full list is: jp (Japanese), en (English), fr (French), de (German), it (Italian), es (Spanish), zh (Chinese), ko (Korean), nl (Dutch), pt (Portugese), ru (Russian), tw (Taiwanese) but if it's 1 (truthy) it shows the lg variant too i.e. frca for French (Canada) or esus for Spanish (US) etc
   //Added Feb. 20th. Source: YW1 Mobile binary
   13734: "get_by_texttype",
@@ -82,7 +82,7 @@
   24100: "map_filter_fade",
   21004: "delete_chara",
   23501: "img_delete",
-  13608: "reserve_event",
+  13608: "reserve_event", // params: (string/hash: event, int: unk1, optional string: eventType?, optional int: unk3 )
   
   // context clues
 
@@ -115,9 +115,9 @@
   15160: "get_yokai_property", // params: (int: property, ParamID) gets a property of said yokai's species (this obtains inter-yokai properties like the Yo-kai's attribute or ID, but not per-yokai stats like level and XP); 26 gets the Yo-kai's BaseID and 25 gets the Yo-kai's name linked to the BaseID, in yw1 propeties 0-27 but properties up to 30 are known to exist in yw2
   5033: "assign_advanced_ui_callback", // params: (hash: UIElementHash aka CRC32 of filename, string: normalfunction, string: touchfunction, string: clickfunction) i.e. assign_advanced_ui_callback($local2, "MenuList_MatrixNormal", "MenuList_MatrixTouch", "Menu_MatrixClick"); // assign_advanced_ui_callback; $local2 is the CRC32 hash of the button object's name
   5032: "assign_basic_ui_callback", // params: same as assign_advanced_ui_callback but dosent have clickfunction
-  5112: "set_tint", // applies a multiplicative tint to a UI element params: (hash/string: UIElementID/Name, float: red, float: green, float: blue); this cannot be stacked
+  5112: "set_tint", // applies a multiplicative tint to a UI element params: (hash/string: UIElementID/Name, float: red, float: green, float: blue); this cannot be stacked - set_tint mostly works on images - use set_text_colour for text
   // update: 29th November 2025
-  14132: "get_trophy_property", // params: (int: trophyIndex, int: property) property 0 returns the TrophyID, property 1 gets the TextID, property 2 gets icon index/rarity so 0 for bronze, 1 for silver and 2 for gold, and property 3 is unknown
+  14132: "get_trophy_property", // params: (int: trophyIndex, int: property) property 0 returns the TrophyID, property 1 gets the TextID, property 2 gets icon index/rarity so 0 for bronze, 1 for silver and 2 for gold, and property 3 checks if you've unlocked the hint
   14130: "get_trophies", // params: (opt int: TrophyRarity; 0 = Bronze, 1 = Silver, 2 = Gold) returns the amount of trophies
   14131: "get_obtained_trophies", // params: (opt int: TrophyRarity; 0 = Bronze, 1 = Silver, 2 = Gold) returns the amount of obtained trophies
   14800: "play_music", // param: (string: musicName)
@@ -138,9 +138,9 @@
   // update 10th December 2025
   5009: "does_element_exist", // params: (hash/string: ElementID/ElementName)
   5001: "delete_element", // params: (hash/string: ElementID/ElementName), note: it is highly recommended to use does_element_exist first before attempting to delete an element
-  1201: "is_touchscreen_pressed", // no params
-  1210: "get_touch_xpos", // no params
-  1211: "get_touch_ypos", // no params
+  1201: "ctrl_pen_is_on_main", // official name, formerly named "is_touchscreen_pressed", // no params
+  1210: "ctrl_pen_get_lx", // official name, formerly named "get_touch_xpos", // no params
+  1211: "ctrl_pen_get_ly", // official name, formerly named "get_touch_ypos", // no params
   1214: "get_touch_delta_x", // no params
   1215: "get_touch_delta_y", // no params
   1130: "get_analog_x", // no params
@@ -157,13 +157,13 @@
   13901: "get_watch_rank", // no params; 0 = E, 1 = D, 2 = C, 3 = B, 4 = A, 5 = S
   13900: "set_watch_rank", // params: (int: rank) 0 = E, 1 = D, 2 = C, 3 = B, 4 = A, 5 = S
   13752: "show_special_modal", // params: (int: modal, int: unk, int: param) i.e. 17, 0, 5 shows UI congratulating the player for ranking up to rank S
-  3402: "load_image", // params: (string: elName, string: filePath)
+  3402: "load_img", // params: (string: elName, string: filePath)
   // update 20th December 2025
   14805: "is_music_playing", // params: (string: musicName)
   14806: "smooth_end_music", // params: (string: musicName, optional float: fadeTime, optional int: stepCount)
   14809: "fade_out_music", // params: (string: musicName, float: duration)
   5430: "assign_resource", // params: (string/hash: elName, string/hash: resourceName, optional: sprX, optional: sprY)
-  5247: "offset_element", // params: (string/hash: elName, int: XDelta, int: YDelta) moves the element from it's current position by XDelta piexls in the X-axis and YDelta pixels in the Y-axis
+  5247: "set_element_offset", // params: (string/hash: elName, int: XDelta, int: YDelta) applies an offset to the element from it's base position by XDelta piexls in the X-axis and YDelta pixels in the Y-axis. Does not stack
   13904: "get_quest_type", // params: (string/hash: QuestID) returns the QuestType; in YW2: 3 = Favor, 2 = Quest, 1 = Story Chapter
   13902: "finalize_state_change", // params: (int: isFinalise) after completing a quest run sub13902(1) - also used for QRs
   // update 23rd December 2025
@@ -175,13 +175,13 @@
   4143: "ctrl_camera_fov", // params: (0, int: fov (radians), transitionDurationScale, interpolation)
   4302: "ctrl_camera_shake", // params: (0, float: amplitudeX, float: amplitudeY, float: durationScale, int: shakeType)
   4161: "ctrl_camera_near_clip", // params: (0, float: nearClip)
-  3302: "load_sky_by_filepath", // loads a sky (.xk) file params: (string/hash: resName, string: filePath) i.e. sub3302("mb_res_a_sky", "sky/default");
+  3302: "load_sky", // loads a sky (.xk) file params: (string/hash: resName, string: filePath) i.e. sub3302("mb_res_a_sky", "sky/default");
   // update 4th January 2026
   5642: "attach_anm_element", // params: (parentEl, anmId, XPos, YPos)
   3501: "delete_resource", // params: (anmID)
   14802: "play_music2", // params: (musName)
   6009: "is_resource_exist", // params: (resName)
-  6001: "delete_resource2", // params: (resName)
+  6001: "delete_effect", // params: (resName)
   // update 16th Januray 2026
   2106: "get_user_input_lock_state", // no params; getter version of set_user_input_lock_state()
   5241: "get_element_drag_delta", // params: (elName, out_dx, out_dy) mutates the values
@@ -214,17 +214,17 @@
   14304: "start_white_fade_in", // params: (int: layer?, float: duration, int: isWait)
   14305: "is_fade_not_over", // params: (int: layer?)
   15118: "delete_item", // params: (string/hash: ItemID, int: ItemQuantity)
-  14804: "play_music4", // params: (musName) - seems to be mainly for sfx
+  14804: "play_music4", // params: (string/int: musName/trackNumber) - seems to be mainly for sfx
   // update 4th Februrary 2026
   15300: "set_yokai_level", // params: (hash: Yo-kai Handle, int: level)
   15102: "create_yokai_handle", // returns handle, params: (hash: ParamID, int: unk set to 2, int: unk set to 0, int: unk set to 3, int: unk set to 0, int: unk set to -1, int: unk set to 1
   15912: "minigame_get_item", // params: (hash: outItemID, int: outQuantity)
   13407: "play_anim", // params: (hash/string: Actor, string: animName, int: unk, float: duration?)
-  13760: "get_system_text2", // params: (hash/string: TextID, int: Number) set Number to 0 unless you need it - similar behaviour to get_system_text()
+  13760: "get_linked_system_text", // params: (hash/string: TextID, int: Number) set Number to 0 unless you need it - similar behaviour to get_system_text()
   13623: "is_event_loading",
   5242: "move_element", // params: (string/hash: elName, int: XPos, int: YPos) moves the element to the specified position
   // update 5th Februrary 2026
-  5622: "set_anm_res2", // params: (hash/string: elName, hash/string: anmRes)
+  5622: "set_anm_res_animated", // params: (hash/string: elName, hash/string: anmRes, optional unsigned: animationNum)
   // update 7th Februrary 2026
   4181: "ctrl_camera_far_clip", // params: (int: layer? set to 0, float: distance)
   4202: "ctrl_camera_depth_level_3D", // params: (0, float: time?, float: depthLevel?, numeric: unk3)
@@ -237,23 +237,90 @@
   14041: "get_weather_event_state", // params: (int: weatherEvent)
   6103: "apply_blink_effect", // params: (hash/string: target, float: intensity, float: frameDuration, int: unk3) - works on models may work on other elements
   5100: "is_element_animation_occuring", // params: (hash/string: targetElement) returns 1 if an animation is occuring else 0
-  14808: "smooth_end_music2", // params: (string: musicName, optional int: fadeTime)
-  14810: "get_current_music", // no params; used with 14808 in StopCurrentBGM (defined @ progcommon)
+  14808: "smooth_end_bgm", // params: (string: musicName, optional int: fadeTime)
+  14810: "get_current_bgm", // no params; used with 14808 in StopCurrentBGM (defined @ progcommon)
   15340: "get_party_num", // no params; returns the amount of Yo-kai the player can befriend without taking into account 0x0646F45E - use GetPartyMemberMax from prog menu instead
-  3420: "get_image_width", // params: (string/hash: resourceName) returns int: imageWidth in pixels
-  3421: "get_image_height", // params: (string/hash: resourceName) returns int: imageHeight in pixels
+  3420: "get_img_width", // params: (string/hash: resourceName) returns int: imageWidth in pixels
+  3421: "get_img_height", // params: (string/hash: resourceName) returns int: imageHeight in pixels
   // update 8th Februrary 2026
-  4002: "register_camera", // params: (string: cameraName, int: cameraType)
   5113: "set_tint_animated", // params: (hash/string: elementName, float: red, float: green, float: blue, int: duration, int: animType)
   16510: "load_image_by_filepath", // params: (hash/string: elementName, string: filePath) e.g. 	$local1 = sub16510($local2, "data/menu/img/<LG>/link_image00");
-  15226: "get_local_link_id" // no params; returns a CRC-32 ID that seems to be console specific i.e. maybe hash of LocalFriendCodeSeed - idk too lazy to check ;p
+  15226: "get_local_link_id", // no params; returns a CRC-32 ID that seems to be console specific i.e. maybe hash of LocalFriendCodeSeed - idk too lazy to check ;p
+  // update 2nd March 2026
+  3710: "model_is_exist", // no params; returns 1 if the model resource has been loaded yet else 0
+  15126: "get_money", // no params; official name is GetMoney - gets the players current money in yen, e.g. $/£/1.23 = 123¥/₩ 
+  15127: "set_money", // params; (int: Money) official name is SetMoney - sets the players current money in yen, e.g. $/£/1.23 = 123¥/₩ 
+  15124: "get_jungle_points", // no params; gets the plays current JP
+  15125: "set_jungle_points", // params: (int: JP) sets the plays current JP
+  15978: "get_battle_points", // no params; gets the player's BP/KP used online
+  15979: "set_battle_points", // params: (int: BP/KP) sets the player's BP/KP used online
+  15128: "get_gym_points", // no params; gets the player's current GP
+  15129: "set_gym_points", // params: (int: GP) sets the player's current GP to the specified value
+  4002: "register_camera", // params: (string: cameraName, int: mode) type 0 = Locked (Normal), 1 = Unlocked (Preview?), 2 = Unk, 3 = Unk, 4 = Unk, 5+ = Unk
+  4010: "assign_camera_layer", // params: (int: layer, string: cameraName) layer 0 is the default used for normal overworld  & menu rendering = camera layer 1 is higher and can be used to override it and so on. 
+  13220: "get_current_map2", // no params; returns the file name of the current map e.g. t101i02
+  14817: "get_open_stream_by_idx", // params: (int: Stream) returns the handle of the music playing in the specified stream
+  14807: "is_music_fade_progress", // params: (int: MusicHandle) returns 1 if the music hasn't finished fading else 0
+  14822: "is_music_loaded_by_handle", // params: (int: MusicHandle)
+  14827: "update_bgm_stream", // no params; UpdateBicycleBGM in prog common is a wrapper over this
+  4021: "camera_is_exist", // params: (int: layer) returns 1 if a camera exists at the specified layer else 0
+  13522: "set_camera_rot_hv", // params: (float: h, float: v)
+  5910: "delete_text", // params: (string/hash: Element) clears all the text attached to the specified element
+  13203: "get_current_map", // no params; returns the file name of the current map e.g. t101i02
+  5248: "set_element_animation_smooth", // params: (int: XOffset, int: YOffset, int: frameDuration, int: easing?) - note: since it's a setter (0, 0, 30, 0) animates it over to it's original position
+  13634: "get_entity_pos", // params: (unk: entity, variable: outX, variable: outY, variable: outZ, variable: outRot (radians))
+  15119: "get_item_num", // params: (string/hash: ItemID)
+  16500: "create_telop_element", // params: (string/hash: telopResourceName, int: screen, int: XPos, int: YPos)
+  16511: "load_telop_by_filepath", // params: (string/hash: telopResourceName, string: filePath) e.g. sub16511("evcaption", "data/menu/ev_caption/telop_tsutinoko");
+  13005: "load_telop_handle", // params: (string: filePath) returns handle e.g. $object0 = sub13005("data/menu/battle_telop/pierrot_time_<LG>.xi");
+  16513: "load_telop_by_handle", // params: (string: telopRresourceName, unk: handle, int: unk) e.g. $local1 = sub16513("res_img_pierrot_curtain", $object0, 1010);
+  16503: "create_telop_element_handle", // returns element handle params: (string/hash: telopResourceName, int: screen, int: XPos, int: YPos, int: unk) e.g. $object0 = sub16503("map_jump_curtain_effect", 0, 200, 4, 1010); 	$local1 = sub5800($object0, 0xD1B8BEF4h);
+  5800: "attach_vfx", // params: (unk: handle/element, hash/string: vfx) use load_vfx first e.g. $local1 = load_vfx(0xD1B8BEF4h); $object0 = sub16503("map_jump_curtain_effect", 0, 200, 4, 1010); 	$local1 = sub5800($object0, 0xD1B8BEF4h);
+  15612: "is_vfx_loading", // no params; returns 1 if the vfx is still being loaded else 0 
+  3401: "delete_resource3", // params: (string/hash: resName) unloads the specified resource
+  15611: "delete_vfx", // params: (string/hash: vfx)
+  5932: "set_text_colour", // params: (string/hash: textElement, float: R | int colour, float: G, float: B) e.g. set_text_colour(0x12345678h, 6) or set_text_colour(0x12345678h, 1.0f, 0.7f, 0.3f) 
+  25551: "ctrl_camera_roll", // params: (int: cameraLayer, numeric: rollAngle (radians?), numeric: duration, int: mode)
+  4103: "ctrl_camera_pos_interp", // params: (int: layer, numeric: XPos, numeric: YPos, numeric: ZPos, numeric: duration, int: mode)
+  3701: "delete_model", // params: (string/hash: modelName)
+  4001: "delete_camera", // params: (string/hash: cameraName)
+  4123: "ctrl_camera_ref_interp", // params; (int: layer, numeric: XPos, numeric: YPos, numeric: ZPos, numeric: duration, int: mode)
+  4105: "is_camera_interp_not_over", // params: (int: layer)
+  4011: "get_camera_by_layer", // params: (int: layer)
+  4500: "load_camera_motion", // params: (string/hash: cameraName, string?: motion?, int: mode?)
+  6852: "play_anim2",
+  26051: "setup_seamless_event", // no params;
+  26050: "setup_visual_event", // no params;
+  26001: "start_first_cut", // no params;
+  4611: "register_camera2", // params: (string: cameraName, int: mode) type 0 = Locked (Normal), 1 = Unlocked (Preview?), 2 = Unk, 3 = Unk, 4 = Unk, 5+ = Unk
+  13630: "run_menu_rpg", // params: (int: MenuCode, ...optional any: menuParams)
+  13637: "is_menu_run_not_over", // no params;
+  13638: "set_menu_run_mode", // params: (int: MenuRunMode) - 0 when not in a menu/menu done, 1 when in SaveRun, not set for SaveRunEx or other menus, 2 for SaveRun2, 3 for SaveRun3
+  2502: "bright_fade_camera", // params: (int: cameraLayer, float: intensity, numeric: duration)
+  2509: "is_bright_fade_camera_not_over", // params: (int: cameraLayer)
+  13230: "is_map_build_not_over", // no params;
+  22000: "is_chara_evp_not_over", // no params;
+  22002: "set_chara_evp_motion", // params: (hash/string: handle, string: animation, opt int: unk, opt float: speed?)
+  22003: "is_chara_evp_motion_not_over", // params: (hash/string: handle)
+  13405: "get_posry", // params: (string/hash: handle, variable: outX, variable: outY, variable: outZ, variable: outRot) - rot is y rotation I believe and you can set any of the out params to 0 if you don't need the out value which level5 generally does for their out XQ instructions
+  21211: "set_chara_lookat", // params: (string/hash: handle, int: mode, ...) mode 2 = lookat pos, 3 = lookat chara, 5 = reset lookat
+  21212: "set_chara_lookat_vector", // params: (float: vectorA, float: vectorB) both should be normalised to range 0f to 1f or be -1f
+  23000: "start_chara_motion_path", // params: (hash/string: handle, numeric: targetX, numeric: targetY, numeric: targetZ, numeric: duration, float: directionWeight, string/hash: unkID)
+  23005: "start_chara_rot_steering", // params: (string/hash: handle, int: mode?, numeric: yawDeg, numeric: duration, int: unkNum, int: unkSpeedOrDelay, string: anim) mode 0 = Absolute rotation steering, 1 = Offset-relative steering
+  22002: "set_chara_motion_state", // params: (string/hash: handle, string: anim, uint/int: flags, int: unkSetTo0)
+  23002: "reset_chara_motion_path", // no params;
+  23001: "is_chara_motion_not_over", // no params;
+  2104: "start_menu_event", // params: (int: MenuNum, opt any: menuParams)
+  2100: "is_menu_event_not_over", // no params;
+  5031: "assign_pen_callback", // params: (int/hash: UIElement, string/hash: CallbackFunction)
+  13614: "show_map_capsule", // params: (string/hash: MapID) plays the crank-a-kai scene on the specified map e.g. Oni Crank-a-kai is "e200g001"
+  16511: "load_telop_by_filepath2", // params: (string/hash: telopResourceName, string: filePath) e.g. sub16511("evcaption", "data/menu/ev_caption/telop_tsutinoko");
+  15423: "run_command_chara_by_id", // params: (int: PartySlot, int: PartIndex?, hash/string: BtlCommandID)
+  15411: "get_object_by_party_idx", // params: (int: PartySlot) returns the object
+  15402: "get_entity_hp", // params: (int: PartySlot, int: PartIndex)
+  15602: "play_cmnd",
+  15620: "drain_effect_all",
+  6813: "is_effect_load_not_over",
+  3342: "load_font_by_filepath" // e.g. sub3342("mm_res_name_fnt", "fnt/ft_sml");
+  // 200, 51, 41
 }
-
-
-
-
-
-
-
-
-
