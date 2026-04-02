@@ -954,7 +954,7 @@ YW2 [
 		BattleAllyScale|False
 		BattleEnemyScale|False
 		MenuScale|False
-		UnkScale|False
+		RenderHeight|False
 	)
 
 	SKILL_CONFIG_INFO (
